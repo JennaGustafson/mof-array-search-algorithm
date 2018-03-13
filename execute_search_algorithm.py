@@ -49,7 +49,7 @@ while array_size <= number_mofs:
     array_pmf_results, list_of_arrays = array_pmf(gases, array_size, experimental_mofs, calculate_pmf_results)
     bin_compositions_results = bin_compositions(gases, list_of_arrays, create_bins_results, array_pmf_results)
     kl_divergence = information_gain(gases, list_of_arrays, bin_compositions_results, create_bins_results)
-    all_arrays_ranked = choose_best_arrays(gases, number_mofs, kl_divergence)
+    all_arrays_ranked = choose_best_arrays(gases, kl_divergence)
     top_number_arrays = max(len(mof_array), len(all_arrays_ranked) // 5)
     all_arrays_ranked = all_arrays_ranked[0:top_number_arrays]
     for each_mof in all_arrays_ranked:

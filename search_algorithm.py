@@ -333,12 +333,11 @@ def information_gain(gas_names, list_of_arrays, bin_compositions_results, create
 
     return(array_gas_info_gain)
 
-def choose_best_arrays(gas_names, number_mofs, information_gain_results):
+def choose_best_arrays(gas_names, information_gain_results):
     """Choose the best MOF arrays by selecting the top KL scores for each gas
 
     Keyword arguments:
     gas_names -- list of gases
-    number_mofs -- minimum and maximum number of mofs in an array, usr specified in config file
     information_gain_results -- list of dictionaries including, mof array, gas, and corresponding kld
     """
     # Combine KLD values for each array,taking the product over all gases
@@ -359,5 +358,5 @@ def choose_best_arrays(gas_names, number_mofs, information_gain_results):
     # Sort results from highest to lowest KLD values
     best_ranked_by_product = sorted(ranked_by_product, key=lambda k: k['num_MOFs'], reverse=True)
     best_ranked_by_product = sorted(ranked_by_product, key=lambda k: k['joint_KLD'], reverse=True)
-    
+
     return(best_ranked_by_product)
