@@ -1,0 +1,10 @@
+__pycache__
+output_*
+sensor_ads_1*
+*.out
+settings/process_config.yaml
+*.png
+test*
+*csv
+*pyc
+example/*
