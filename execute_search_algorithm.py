@@ -19,7 +19,7 @@ from search_algorithm import (read_output_data,
 all_results_import = read_output_data(sys.argv[1])
 experimental_mass_import = read_output_data(sys.argv[2])
 
-filepath = 'process_config.yaml'
+filepath = 'settings/process_config.yaml'
 data = yaml_loader(filepath)
 
 mof_array = data['mof_array']
@@ -36,13 +36,13 @@ mrange = data['mrange']
 gases = data['gases']
 number_mofs = data['number_mofs']
 number_bins = data['number_bins']
+array_size = data['array_size']
 
 experimental_mass_results, experimental_mass_mofs, experimental_mofs = import_experimental_results(mof_array, experimental_mass_import, mof_densities_import, gases)
 import_data_results = import_simulated_data(experimental_mofs, all_results_import, mof_densities_import, gases)
 calculate_pmf_results = calculate_pmf(experimental_mass_results, import_data_results, experimental_mofs, stdev, mrange)
 create_bins_results = create_bins(experimental_mofs, calculate_pmf_results, gases, number_bins)
 
-num_divisions = 2
 while array_size >= number_mofs:
     new_mofs = []
     print(array_size)
