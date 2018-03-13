@@ -43,17 +43,19 @@ import_data_results = import_simulated_data(experimental_mofs, all_results_impor
 calculate_pmf_results = calculate_pmf(experimental_mass_results, import_data_results, experimental_mofs, stdev, mrange)
 create_bins_results = create_bins(experimental_mofs, calculate_pmf_results, gases, number_bins)
 
-while array_size >= number_mofs:
+while array_size <= number_mofs:
     new_mofs = []
     print(array_size)
     array_pmf_results, list_of_arrays = array_pmf(gases, array_size, experimental_mofs, calculate_pmf_results)
     bin_compositions_results = bin_compositions(gases, list_of_arrays, create_bins_results, array_pmf_results)
     kl_divergence = information_gain(gases, list_of_arrays, bin_compositions_results, create_bins_results)
-    all_arrays_ranked = choose_best_arrays(gases, number_mofs, kl_divergence)[0:1]
+    all_arrays_ranked = choose_best_arrays(gases, number_mofs, kl_divergence)
+    top_number_arrays = max(len(mof_array), len(all_arrays_ranked) // 5)
+    all_arrays_ranked = all_arrays_ranked[0:top_number_arrays]
     for each_mof in all_arrays_ranked:
         new_mofs.extend(list(each_mof['mof array']))
     experimental_mofs = list(np.unique(new_mofs))
-    array_size -= 2
+    array_size += 1
 
-print(all_arrays_ranked)
+print(all_arrays_ranked[0])
 print(datetime.now().strftime("%Y_%m_%d__%H_%M_%S"))
